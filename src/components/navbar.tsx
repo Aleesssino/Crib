@@ -17,9 +17,9 @@ const user = session.data?.user;
         </li>
         )}
         {user == null ? (<li>
-            <button onClick={() => void signIn()}>Log out</button>
+            <button onClick={() => void signIn()}>Log in</button>
         </li>) : <li>
-            <button onClick={() => void signOut()}>Log in</button>
+            <button onClick={() => void signOut()}>Log out</button>
         </li>
         }
     </ul>
