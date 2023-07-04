@@ -13,9 +13,11 @@ const user = session.data?.user;
             <Link href="/">Home</Link>
         </li>
         {user != null && (
+            
         <li>
+            <ProfileImage src={session.data?.user.image}/>
             <Link href={`/profiles/${user.id}`}>
-                <ProfileImage src={session.data?.user.image}/>
+                
             </Link>
         </li>
         )}
