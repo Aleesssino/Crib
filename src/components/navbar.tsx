@@ -9,20 +9,19 @@ const user = session.data?.user;
 
    return <nav className="sticky top-0 px-4 py-8">
     <ul className="flex flex-col items-start gap-2 whitespace-nowrap">
+        
+        {user != null &&
         <div>
-        <ProfileImage src={user?.image}/>
+        <Link href={`/profiles/${user.id}`}>
+            <ProfileImage src={session.data?.user.image}/>  
+        </Link>
         </div>
+        }
+        
         <li>
             <Link href="/">Home</Link>
         </li>
-        {user != null && (
-            
-        <li>    
-            <Link href={`/profiles/${user.id}`}>
-            <ProfileImage src={session.data?.user.image}/>  
-            </Link>
-        </li>
-        )}
+
         {user == null ? (<li>
             <button onClick={() => void signIn()}>Log in</button>
         </li>) : <li>
