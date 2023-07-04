@@ -9,6 +9,9 @@ const user = session.data?.user;
 
    return <nav className="sticky top-0 px-4 py-8">
     <ul className="flex flex-col items-start gap-2 whitespace-nowrap">
+        <div>
+        <ProfileImage src={user?.image}/>
+        </div>
         <li>
             <Link href="/">Home</Link>
         </li>
