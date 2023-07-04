@@ -1,5 +1,6 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import { ProfileImage } from "./ProfileImage";
 
 export function SideNav() {
 
@@ -13,7 +14,9 @@ const user = session.data?.user;
         </li>
         {user != null && (
         <li>
-            <Link href={`/profiles/${user.id}`}>You</Link>
+            <Link href={`/profiles/${user.id}`}>
+                <ProfileImage src={session.data?.user.image}/>
+            </Link>
         </li>
         )}
         {user == null ? (<li>
