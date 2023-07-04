@@ -17,11 +17,9 @@ const user = session.data?.user;
         </li>
         {user != null && (
             
-        <li>
-            <ProfileImage src={session.data?.user.image}/>
-        
+        <li>    
             <Link href={`/profiles/${user.id}`}>
-                
+            <ProfileImage src={session.data?.user.image}/>  
             </Link>
         </li>
         )}
