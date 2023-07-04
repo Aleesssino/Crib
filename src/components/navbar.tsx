@@ -18,10 +18,7 @@ const user = session.data?.user;
         </div>
         }
         
-        <li>
-            <Link href="/">Home</Link>
-        </li>
-
+        
         {user == null ? (<li>
             <button onClick={() => void signIn()}>Log in</button>
         </li>) : <li>
