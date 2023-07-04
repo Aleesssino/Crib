@@ -2,11 +2,11 @@
 //import Head from "next/head";
 //import Link from "next/link";
 import { PostForm } from "~/components/postForm";
-//import { api } from "~/utils/api";
+import { api } from "~/utils/api";
 
 export default function Home() {
  
-  //const post = api.post.hello.useQuery({ text: "from tRPC" });
+  const post = api.post.hello.useQuery({ text: "from tRPC" });
 
   return (
     <>

@@ -16,6 +16,7 @@ const user = session.data?.user;
             
         <li>
             <ProfileImage src={session.data?.user.image}/>
+        
             <Link href={`/profiles/${user.id}`}>
                 
             </Link>
