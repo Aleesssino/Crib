@@ -19,9 +19,9 @@ function Form () {
         <form className="flex border-b px-4 py-2">
             <div className="relative flex w-full">
             <textarea placeholder="What's on your mind?" className="bg-transparent flex w-full rounded-xl p-4 text-xl grow border-b-2 overflow-hidden"/>
-            <div className="absolute right-0 top-0 bottom-0 flex items-center pr-3 pointer-events-none">
+            
             <button className="h-10 w-10 absolute right-0 top-1/2 transform -translate-y-1/2 border-l border-b border-orange-500 self-end  rounded-full bg-slate-50 text-slate-950 text-xl">🡹</button>
-            </div>
+            
             </div>
                
         </form>
