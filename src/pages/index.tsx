@@ -20,7 +20,7 @@ export default function Home() {
       <PostForm/>
 
       <div>
-        
+      
       </div>
     </>
   );
