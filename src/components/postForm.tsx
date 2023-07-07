@@ -22,7 +22,7 @@ function Form () {
     
     const createPost = api.posts.create.useMutation({
         onSuccess: (newPost) => {
-          console.log(newPost);
+          // console.log(newPost);
           setInputValue("");
         },
       });
@@ -32,14 +32,14 @@ function Form () {
         createPost.mutate({ content: inputValue });
       }
 
-
+// TODO: fix the form so text will not appear behind button 
     return (
         <form onSubmit={handleSubmit} className="flex border-b px-4 py-2">
             <div className="relative flex w-full">
             <textarea value={inputValue}
           onChange={(e) => setInputValue(e.target.value)} placeholder="What's on your mind?" className="bg-transparent flex w-full rounded-xl p-4 text-xl grow border-b-2 overflow-hidden"/>
-            
-            <button className="ml-8 h-10 w-10 absolute right-0 top-1/2 transform -translate-y-1/2 border-l border-b border-orange-500 self-end  rounded-full bg-slate-50 text-slate-950 text-xl">▲</button>
+        
+            <button className="ml-8 h-10 w-10 absolute right-0 top-1/2 transform -translate-y-1/2 border-l border-b border-orange-500 self-end  rounded-full bg-slate-50 text-slate-950 text-xl">▶</button>
             
             </div>
                
