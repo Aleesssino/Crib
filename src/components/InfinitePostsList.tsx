@@ -4,8 +4,8 @@ import { ProfileImage } from "./ProfileImage";
 import { useSession } from "next-auth/react";
 
 import { VscHeart, VscHeartFilled } from "react-icons/vsc" 
-import { Like } from "@prisma/client";
-import { boolean } from "zod";
+//import { Like } from "@prisma/client";
+//import { boolean } from "zod";
 
 type Post = {
   id: string;
