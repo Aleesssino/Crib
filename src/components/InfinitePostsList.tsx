@@ -75,7 +75,7 @@ function PostCard({
         >
             {user.name}
         </Link>
-        <span className="text-grey-600">{formatDate.format(createdAt)}</span>
+        <span className="text-grey-600 text-sm">{formatDate.format(createdAt)}</span>
 
       </div>
       <p className="whitespace-pre-wrap">{content}</p>
