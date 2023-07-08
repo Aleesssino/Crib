@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <>
     <header className="sticky top-0 z-10 pt-2">
-      <h1 className="text-lg font-semibold mb-2 px-3">Crib</h1>
+      <h1 className="text-lg font-semibold mb-2 px-3">Welcome in The Crib</h1>
     </header>
       <PostForm/>
 
