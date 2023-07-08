@@ -13,7 +13,7 @@ export const postsRouter = createTRPCRouter({
   }),*/
 
   // feed
-  infiniteFeed: protectedProcedure
+  infiniteFeed: publicProcedure
     .input(
       z.object({
         limit: z.number().optional(),
