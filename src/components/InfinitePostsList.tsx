@@ -4,8 +4,10 @@ import { ProfileImage } from "./ProfileImage";
 import { useSession } from "next-auth/react";
 
 import { VscHeart, VscHeartFilled } from "react-icons/vsc" 
+import { api } from "~/utils/api";
 //import { Like } from "@prisma/client";
 //import { boolean } from "zod";
+
 
 type Post = {
   id: string;
@@ -64,6 +66,46 @@ function PostCard({
   likeCount,
   likedByMe,
 }: Post) {
+
+  const trpcUtils = api.useContext();
+  const toggleLike = api.posts.toggleLike.useMutation({
+    onSuccess:  ({ addedLike }) => {
+
+      const updatedData: Parameters<typeof trpcUtils.posts.infiniteFeed.setInfiniteData>[1] = (oldData) => {
+        if (oldData == null) return
+
+        const countModif = addedLike ? 1 : -1
+
+        return {
+          ...oldData,
+          pages: oldData.pages.map(page => {
+            return {
+              ...page,
+              posts: page.posts.map(post => {
+                 if (post.id === id) {
+                  return {
+                    ...post,
+                    likeCount: post.likeCount + countModif,
+                    likedByMe: addedLike
+                  }
+                 }
+                 return post;
+              })
+            }
+          })
+        }
+      }
+
+       trpcUtils.posts.infiniteFeed.setInfiniteData({}, updatedData);
+    }
+  });
+
+
+
+  function handleToggleLike() {
+    toggleLike.mutate({ id })
+  }
+
   return (
     <li className="flex gap-4 border px-4 py-4">
       <Link href={`/profiles/${user.id}`}>
@@ -79,7 +121,7 @@ function PostCard({
 
       </div>
       <p className="whitespace-pre-wrap">{content}</p>
-      <Like likedByMe={likedByMe} likeCount={likeCount}/>
+      <Like onClick={handleToggleLike} isLoading={toggleLike.isLoading} likedByMe={likedByMe} likeCount={likeCount}/>
     </li>
   );
 }
@@ -87,9 +129,11 @@ function PostCard({
 type HeartProps = {
     likedByMe: boolean | undefined;
     likeCount: number;
+    onClick: () => void;
+    isLoading: boolean;
 }
 
-function Like({likedByMe, likeCount}: HeartProps) {
+function Like({likedByMe, likeCount, isLoading, onClick}: HeartProps) {
     const session = useSession();
     const HeartIcon = likedByMe ? VscHeartFilled : VscHeart
 
@@ -103,7 +147,10 @@ function Like({likedByMe, likeCount}: HeartProps) {
     </div>);
     }
     return(
-        <button className={`group items-center gap-1 self-end fles transition-colors duration-200 ${likedByMe ? "text-emerald-50" : "text-slate-800"} hover:text-slate-50`}>
+        <button 
+          disabled={isLoading}
+          onClick={onClick}
+          className={`group items-center gap-1 self-end fles transition-colors duration-200 ${likedByMe ? "text-emerald-50" : "text-slate-800"} hover:text-slate-50`}>
             
                <HeartIcon className={`transition-colors duration-200 ${likedByMe ? "fill-slate-100" : "fill-none group-hover:fill-slate-100"}`}/>
         

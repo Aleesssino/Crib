@@ -10,7 +10,7 @@ const user = session.data?.user;
    return <nav className="sticky top-0 px-4 py-8">
     <ul className="flex flex-col items-start gap-2 whitespace-nowrap">
         
-        {user != null  &&
+        {user != null &&
         <div>
         <Link href={`/profiles/${user.id}`}>
             <ProfileImage src={session.data?.user.image} className="w-16 h-16"/>  
@@ -19,9 +19,16 @@ const user = session.data?.user;
         }
         
         
-        {user == null ? (<li>
+        {user == null ? (
+        <div className="">
+        <ProfileImage src="/Crib_.png" className="w-24 h-24 gap-2 flex"/>
+    
+        <li>
+            
             <button onClick={() => void signIn()}>Log in</button>
-        </li>) : <li>
+        </li>
+        </div>
+        ) : <li>
             <button onClick={() => void signOut()}>Log out</button>
         </li>
         }
