@@ -18,12 +18,45 @@ export function PostForm () {
 function Form () {
     const session = useSession();
     const [inputValue, setInputValue] = useState("");
+    const trpcUtils = api.useContext();
 
     
+
     const createPost = api.posts.create.useMutation({
         onSuccess: (newPost) => {
           // console.log(newPost);
           setInputValue("");
+
+          if (session.status !== "authenticated") {
+            return
+          }
+
+          trpcUtils.posts.infiniteFeed.setInfiniteData({}, (oldData) => {
+            if (oldData == null || oldData.pages[0] == null) return
+          
+            const cachePost = {
+              ...newPost,
+              likeCount: 0,
+              likedByMe: false,
+              user: {
+                id: session.data.user.id,
+                name: session.data.user.name,
+                image: session.data.user.image
+              }
+
+            }
+
+            return {
+              ...oldData,
+              page: [
+                {
+                  ...oldData.pages[0],
+                  posts: [cachePost, ...oldData.pages[0].posts]
+                }, 
+                ...oldData.pages.slice(1)
+              ]
+            }
+          })
         },
       });
     
